@@ -14,18 +14,11 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Simple Client / Server Socket Tests to test the tools used in the
- * client-server architecture of the Connect5 game. Tests Server & Client
- * side sockets - a lock object is used for synchronous between the two sides.
- * To confirm data is passing in/out from server to client and client to server.
+ * client-server architecture of the 5-In-A-Row game. Tests Server & Client
+ * side sockets. To confirm data is passing in/out from server to client
+ * and client to server.
  *
- *  NOTE: Not Complete -
- * Need to go into greater detail on tests.. seperate into specific test classes
- * Test all testable methods in both Connect5Client and Connect5Server not just
- * server & client sockets & create a proper TestSuite with the test classes that
- * will be created. Add - @Parameterized Tests,  @Exception Tests,  @Timeout,
- * @BeforeAll, @AfterAll, @RunsWith, @SelectClasses({ }).
- *
- * @author aislingboner
+ * @author darragh moran
  */
 public class ClientServerTest {
 
@@ -62,26 +55,20 @@ public class ClientServerTest {
         server.close();
     }
 
-    /**
-     * write() - Writes to OutputStream for both server and client.
-     */
+    // Writes to OutputStream for both server and client
     private void write(OutputStream out, String str) throws IOException {
         out.write(str.getBytes());
         out.flush();
     }
 
-    /**
-     * printWrite() - Writes to OutputStream for both server and client.
-     */
+    //Writes to OutputStream for both server and client.
     private void printWrite(OutputStream out, String str) throws IOException {
         PrintWriter pw = new PrintWriter(out);
         pw.print(str);
         pw.flush();
     }
 
-    /**
-     * assertRead() -Reads from InputStream for both server and client.
-     */
+    // Reads from InputStream for both server and client.
     private void assertRead(InputStream in, String expected) throws IOException {
         assertEquals("Too few bytes available for reading: ", expected.length(), in.available());
         byte[] buf = new byte[expected.length()];
@@ -90,7 +77,7 @@ public class ClientServerTest {
     }
 
     /**
-     * listen() - Listens & accepts a single incoming request (server side) on a separate
+     * Listens & accepts a single incoming request (server side) on a separate
      * thread. Once the request is received, takes in its IO streams and sends to
      * the client side above through the shared lock object.
      */
